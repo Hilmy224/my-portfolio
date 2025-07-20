@@ -1,6 +1,6 @@
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-start overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800">
         <div
@@ -9,14 +9,12 @@ export function HeroSection() {
       </div> 
 
       {/* Content */}
-      <div className="relative z-10 px-6">
-        <div className="inline-block bg-slate-800/60 backdrop-blur-sm rounded-lg p-8 border border-purple-500/30">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
-            <span className="font-zilla text-lg">Software Engineer</span>
-            <span className="block text-purple-400">Cybersecurity</span>
-            <span className="block">Enthusiast</span>
-          </h1>
-        </div>
+      <div className="relative z-10 px-6 ml-8 md:ml-16">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
+          <span className="font-serif text-white-400 text-lg">Software Engineer</span>
+          <span className="block font-sans text-purple-400">Cybersecurity</span>
+          <span className="block">Enthusiast</span>
+        </h1>
       </div>
 
       {/* Floating cityscape elements */}
