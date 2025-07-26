@@ -1,12 +1,20 @@
 import { Button } from "@/components/ui/button"
 import { Download, Mail } from "lucide-react"
+import TestBrushPng from "../../public/TestBrushPng.png"
+import PFP from "../../public/circlePFP.png"
 
 export function AboutSection() {
   return (
     <section id="about" className="py-20 bg-slate-900 relative">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="inline-block bg-purple-600/20 backdrop-blur-sm rounded-full px-6 py-2 mb-12">
-          <h2 className="text-2xl font-bold text-white">About</h2>
+        <div className="inline-block mb-12 relative">
+          {/* Background image behind the About text */}
+          <img
+            src={TestBrushPng.src}
+            alt=""
+            className="absolute -left-23 -top-5 w-[350%] max-w-none pointer-events-none"
+          />
+          <h2 className="text-2xl font-bold text-white relative">About</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -15,7 +23,7 @@ export function AboutSection() {
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 p-1">
                 <div className="w-full h-full rounded-full bg-slate-900 p-2">
                   <img
-                    src="/placeholder.svg?height=240&width=240"
+                    src={PFP.src}
                     alt="M Hilmy AA"
                     className="w-full h-full rounded-full object-cover"
                   />

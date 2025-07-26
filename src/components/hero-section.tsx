@@ -11,9 +11,9 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 px-6 ml-8 md:ml-16">
         <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
-          <span className="font-serif text-white-400 text-lg">Software Engineer</span>
-          <span className="block font-sans text-purple-400">Cybersecurity</span>
-          <span className="block">Enthusiast</span>
+          <span className="px-6 block font-serif text-white-400 opacity-70">Software Engineer</span>
+          <span className="px-4 block font-serif text-white-400 opacity-70">Cybersecurity</span>
+          <span className="block font-serif text-white-400 opacity-70">Enthusiast</span>
         </h1>
       </div>
 
