@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Smartphone, Presentation } from "lucide-react"
 import { useState } from "react"
+import TestBrushPng from "../../public/TestBrushPng.png"
 
 // Define the Project type
 type Project = {
@@ -162,7 +163,11 @@ export function ProjectsSection() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="inline-block mb-12 relative">
             {/* Background image behind the Projects text */}
-            <div className="absolute -left-23 -top-5 w-[280%] h-12 bg-gradient-to-r from-purple-600/20 via-purple-500/30 to-transparent blur-xl pointer-events-none" />
+            <img
+              src={TestBrushPng.src}
+              alt=""
+              className="absolute -left-23 -top-5 w-[280%] max-w-none pointer-events-none"
+            />
             <h2 className="text-2xl font-bold text-white relative">Projects</h2>
           </div>
 
