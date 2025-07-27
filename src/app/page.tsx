@@ -13,9 +13,9 @@ export default function Portfolio() {
       <HeroSection />
       <AboutSection />
       <ProjectsSection />
-      <ExperienceSection />
       <ArticlesSection />
       <ContactsSection />
     </div>
   )
 }
+//<ExperienceSection /> add later

@@ -1,17 +1,34 @@
+"use client";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Smartphone, Presentation } from "lucide-react"
-import { SetStateAction, useState } from "react"
+import { useState } from "react"
+import TestBrushPng from "../../public/TestBrushPng.png"
 
-const projects = [
+// Define the Project type
+type Project = {
+  title: string
+  description: string
+  fullDescription: string
+  technologies: string[]
+  images: string[]
+  links: Array<{
+    type: string
+    url: string
+    label: string
+  }>
+}
+
+const projects: Project[] = [
   {
     title: "Explosive Outplay",
     description:
       "A fast-paced 2-player tactical arcade game with delayed bombs and chess-style movement. Nominated for Best Visual & Best Gameplay at GIM ITB GameJam 2025.",
     fullDescription:
       "A fast-paced 2-player tactical arcade game with delayed bombs and chess-style movement. Nominated for Best Visual & Best Gameplay at GIM ITB GameJam 2025. This innovative game combines strategic thinking with quick reflexes, featuring unique bomb mechanics that add layers of tactical depth to every match. Players must carefully plan their moves while anticipating their opponent's strategy, creating an engaging and competitive experience.",
-    technologies: ["Godot", "GDScript", "Game Development", "2D Graphics"],
-    images: ["public/projectsImage/explosive1.png?height=400&width=600", "public/projectsImage/explosive2.png?height=400&width=600&text=Gameplay"],
+    technologies: ["Game Development", "Godot", "GDScript"],
+    images: ["projectsImage/explosive1.png?height=400&width=600", "projectsImage/explosive2.png?height=400&width=600&text=Gameplay"],
     links: [
       { type: "demo", url: "https://samueltaniel.itch.io/explosive-outplay", label: "Play Game" }
     ]
@@ -19,11 +36,11 @@ const projects = [
   {
     title: "On the Flip Side",
     description:
-      "A simple 3D FPS with innovative world-switching mechanics, built using Godot engine for an immersive gaming experience.",
+      "A simple 3D FPS with playstyle state switching mechanics, built using Godot engine.",
     fullDescription:
-      "A simple 3D FPS with innovative world-switching mechanics, built using Godot engine for an immersive gaming experience. This game features a unique mechanic where players can flip between different dimensional versions of the same level, each with its own challenges and opportunities. The seamless transition between worlds creates a mind-bending experience that challenges traditional FPS gameplay conventions.",
-    technologies: ["Godot", "3D Graphics", "FPS Mechanics", "GDScript"],
-    images: ["public/projectsImage/flip1.png?height=400&width=600", "public/projectsImage/flip2.png?height=400&width=600&text=World1", "/placeholder.svg?height=400&width=600&text=World2"],
+      "A simple 3D FPS with playstyle state switching mechanics, built using Godot engine. This game features a unique mechanic where players can flip between different modes, each with its own benefits and weakness. Depending on the situation you have to switch playstyles",
+    technologies: ["Game Development", "Godot", "Blender", "GDScript"],
+    images: ["projectsImage/flip1.png?height=400&width=600", "projectsImage/flip2.png?height=400&width=600&text=World1"],
     links: [
       { type: "demo", url: "https://subdvd2.itch.io/ontheflipside", label: "Play Game" }
     ]
@@ -31,11 +48,11 @@ const projects = [
   {
     title: "Full Stack Witchcraft",
     description:
-      "A surreal narrative game featuring duplicating books and a watchful government. An atmospheric story-driven experience.",
+      "A color pop game featuring duplicating books and a watchful teacher. An struggle to be the teachers best student.",
     fullDescription:
-      "A surreal narrative game featuring duplicating books and a watchful government. An atmospheric story-driven experience that explores themes of knowledge, surveillance, and resistance in a dystopian setting. Players navigate through a world where information is both powerful and dangerous, making choices that affect the story's outcome while uncovering the mysteries behind the duplicating books phenomenon.",
-    technologies: ["Godot", "Narrative Design", "Game Development", "Storytelling"],
-    images: ["/public/projectsImage/witchcraft1.png?height=400&width=600", "/public/projectsImage/witchcraft2.png?height=400&width=600&text=Story"],
+      "A game featuring duplicating books and a watchful government. An 2 Player PvP game where you are tasked to clean up the mess in the lab by your teacher but your competitive spirit gets the better of you to the point of sabotaging your fellow student.",
+    technologies: ["Game Development","Blender",],
+    images: ["projectsImage/witchcraft1.png?height=400&width=600", "projectsImage/witchcraft2.png?height=400&width=600&text=Story"],
     links: [
       { type: "demo", url: "https://samueltaniel.itch.io/full-stack-witchcraft", label: "Play Game" }
     ]
@@ -45,9 +62,9 @@ const projects = [
     description:
       "A comprehensive web-based platform to streamline football administration, enabling digital registration, transfers, and competition management.",
     fullDescription:
-      "A comprehensive web-based platform to streamline football administration, enabling digital registration, transfers, and competition management. This system revolutionizes how futsal leagues and tournaments are managed, providing tools for player registration, team management, match scheduling, and real-time score tracking. The platform includes administrative dashboards, player profiles, and automated tournament bracket generation.",
-    technologies: ["JavaScript", "Web Development", "Database Management", "Admin Panel"],
-    images: ["/public/projectsImage/fmb1.png?height=400&width=600", "/public/projectsImage/fmb2.png?height=400&width=600&text=Dashboard", "/placeholder.svg?height=400&width=600&text=Management"],
+      "A comprehensive web-based platform to streamline football administration, enabling digital registration, transfers, and competition management. This system is a step to how futsal leagues and tournaments are managed, providing tools for player registration, team management, match scheduling, and score tracking. The platform includes administrative dashboards, player coach and club admin management, verification processes for transfers between clubs",
+    technologies: ["Web Development","Jira", "Next Js", "Nest Js", "TypeScript", "Prisma"],
+    images: ["projectsImage/fmb1.png?height=400&width=600", "projectsImage/fmb2.png?height=400&width=600&text=Dashboard"],
     links: [
       { type: "github", url: "https://github.com/Momofin-K02", label: "Source Code" },
       { type: "demo", url: "https://futsal-frontend-opal.vercel.app/", label: "Live Demo" }
@@ -58,24 +75,23 @@ const projects = [
     description:
       "A web-based book borrowing platform designed to promote literacy, featuring user-friendly interfaces for book management and borrowing systems.",
     fullDescription:
-      "A web-based book borrowing platform designed to promote literacy, featuring user-friendly interfaces for book management and borrowing systems. SiBook connects readers with a vast digital library, allowing them to discover, borrow, and manage books seamlessly. The platform includes features like book recommendations, reading progress tracking, community reviews, and administrative tools for librarians to manage inventory and user accounts.",
-    technologies: ["Web Development", "Database", "UI/UX", "Literary Platform"],
-    images: ["/public/projectsImage/Sibook1.png?height=400&width=600", "/public/projectsImage/Sibook2.png?height=400&width=600&text=Library", "/placeholder.svg?height=400&width=600&text=Mobile"],
+      "A web-based book borrowing platform designed to promote literacy, featuring user-friendly interfaces for book management and borrowing systems. SiBook connects readers with a vast digital library, allowing them to discover, borrow, and manage books seamlessly. The platform includes features like community reviews, and administrative tools for librarians to manage inventory and user accounts.",
+    technologies: ["Web Development", "Django", "Python","Flutter", "Dart"],
+    images: ["projectsImage/Sibook1.png?height=400&width=600", "projectsImage/Sibook2.png?height=400&width=600&text=Library"],
     links: [
       { type: "github", url: "https://github.com/SiBook-D08/SiBook", label: "Web Repository" },
       { type: "github", url: "https://github.com/SiBook-D08/SiBook-mobile", label: "Mobile Repository" },
       { type: "demo", url: "https://si-book.vercel.app/", label: "Web Demo" },
-      { type: "mobile", url: "https://si-book.vercel.app/", label: "Mobile Version" }
     ]
   },
   {
     title: "Fashion Pedia",
     description:
-      "A Spring Boot-based fashion encyclopedia project providing comprehensive fashion information and resources in an organized digital format.",
+      "A Spring Boot-based fashion encyclopedia project providing  fashion information and resources in an organized digital format.",
     fullDescription:
-      "A Spring Boot-based fashion encyclopedia project providing comprehensive fashion information and resources in an organized digital format. Fashion Pedia serves as a comprehensive database of fashion trends, designers, brands, and style guides. Users can explore fashion history, discover current trends, and access detailed information about clothing items, accessories, and fashion industry insights through an intuitive and visually appealing interface.",
-    technologies: ["Spring Boot", "Java", "Web Development", "Encyclopedia"],
-    images: ["/public/projectsImage/AFK31.png?height=400&width=600"],
+      "A Spring Boot-based fashion encyclopedia project providing  fashion information and resources in an organized digital format. Fashion Pedia serves as a  database of fashion trends, designers, brands, and style guides. Users can explore fashion history, discover current trends, and access detailed information about clothing items, accessories, and fashion industry insights through an intuitive and visually appealing interface.",
+    technologies: ["Spring Boot", "Java", "Web Development"],
+    images: ["projectsImage/AFK31.png?height=400&width=600"],
     links: [
       { type: "github", url: "https://github.com/orgs/AFK-3/repositories", label: "Organization" },
       { type: "demo", url: "https://afk-3-frontend.vercel.app/auth", label: "Live Demo" },
@@ -89,7 +105,7 @@ const projects = [
     fullDescription:
       "A practical shopping-list and inventory management application built using Django, featuring CRUD operations and user-friendly interface. This system helps users organize their shopping needs and manage inventory efficiently. Features include item categorization, quantity tracking, shopping list generation, price monitoring, and inventory alerts for low-stock items. The application provides both web and mobile-responsive interfaces for maximum accessibility.",
     technologies: ["Django", "Python", "Web Development", "Database Management"],
-    images: ["/public/projectsImage/Inventory1.png?height=400&width=600", "/public/projectsImage/Inventory2.png?height=400&width=600&text=Inventory"],
+    images: ["projectsImage/Inventory1.png?height=400&width=600", "projectsImage/Inventory2.png?height=400&width=600&text=Inventory"],
     links: [
       { type: "github", url: "https://github.com/Hilmy224/shopping-list-TaskVersion", label: "Source Code" },
       { type: "demo", url: "https://muhammad-hilmy21-tugas.pbp.cs.ui.ac.id/", label: "Live Demo" }
@@ -111,10 +127,11 @@ const getLinkIcon = (type: string) => {
 }
 
 export function ProjectsSection() {
-  const [selectedProject, setSelectedProject] = useState(null)
+  // Use proper typing for the state
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  const openModal = (project: SetStateAction<null>, imageIndex = 0) => {
+  const openModal = (project: Project, imageIndex = 0) => {
     setSelectedProject(project)
     setCurrentImageIndex(imageIndex)
   }
@@ -144,66 +161,139 @@ export function ProjectsSection() {
     <>
       <section id="projects" className="py-20 bg-slate-800 relative">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="inline-block bg-purple-600/20 backdrop-blur-sm rounded-full px-6 py-2 mb-12">
-            <h2 className="text-2xl font-bold text-white">Projects</h2>
+          <div className="inline-block mb-12 relative">
+            {/* Background image behind the About text */}
+            <img
+              src={TestBrushPng.src}
+              alt=""
+              className="absolute -left-23 -top-5 w-[280%] max-w-none pointer-events-none"
+            />
+            <h2 className="text-2xl font-bold text-white relative">Projects</h2>
           </div>
 
-          <div className="overflow-x-auto pb-4">
-            <div className="flex space-x-6 w-max">
-              {projects.map((project, index) => (
-                <Card key={index} className="w-80 bg-slate-900/50 border-purple-500/30 backdrop-blur-sm flex-shrink-0">
-                  <CardHeader className="pb-3">
-                    <div 
-                      className="relative cursor-pointer group"
-                      onClick={() => openModal(project, 0)}
-                    >
-                      <img
-                        src={project.images[0] || "/placeholder.svg"}
-                        alt={project.title}
-                        className="w-full h-48 object-cover rounded-lg mb-4 transition-transform group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
-                        <span className="text-white text-sm font-medium">Click to view</span>
-                      </div>
-                      {project.images.length > 1 && (
-                        <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
-                          +{project.images.length - 1} more
+          {/* Custom Scrollable Container */}
+          <div className="relative">
+            {/* Custom Scrollbar Container */}
+            <div 
+              className="overflow-x-auto pb-6 custom-scrollbar"
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: '#8b5cf6 #1e293b'
+              }}
+            >
+              <div className="flex space-x-6 w-max">
+                {projects.map((project, index) => (
+                  <Card key={index} className="w-80 bg-slate-900/50 border-purple-500/30 backdrop-blur-sm flex-shrink-0 hover:bg-slate-900/70 transition-all duration-300">
+                    <CardHeader className="pb-3">
+                      <div 
+                        className="relative cursor-pointer group"
+                        onClick={() => openModal(project, 0)}
+                      >
+                        <img
+                          src={project.images[0] || "/placeholder.svg"}
+                          alt={project.title}
+                          className="w-full h-48 object-cover rounded-lg mb-4 transition-transform group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                          <span className="text-white text-sm font-medium">Click to view</span>
                         </div>
-                      )}
-                    </div>
-                    <CardTitle className="text-white text-lg">{project.title}</CardTitle>
-                    <CardDescription className="text-gray-400 text-sm leading-relaxed line-clamp-3">
-                      {project.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="bg-purple-600/20 text-purple-300 text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="flex flex-wrap gap-3">
-                      {project.links.map((link, linkIndex) => (
-                        <a
-                          key={linkIndex}
-                          href={link.url}
-                          className="flex items-center text-gray-400 hover:text-purple-400 transition-colors text-sm"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {getLinkIcon(link.type)}
-                          <span className="ml-1">{link.label}</span>
-                        </a>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                        {project.images.length > 1 && (
+                          <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                            +{project.images.length - 1} more
+                          </div>
+                        )}
+                      </div>
+                      <CardTitle className="text-white text-lg">{project.title}</CardTitle>
+                      <CardDescription className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.technologies.map((tech) => (
+                          <Badge key={tech} variant="secondary" className="bg-purple-600/20 text-purple-300 text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap gap-3">
+                        {project.links.map((link, linkIndex) => (
+                          <a
+                            key={linkIndex}
+                            href={link.url}
+                            className="flex items-center text-gray-400 hover:text-purple-400 transition-colors text-sm"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {getLinkIcon(link.type)}
+                            <span className="ml-1">{link.label}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
+
+            {/* Gradient Fade Effects */}
+            <div className="absolute left-0 top-0 bottom-6 w-8 bg-gradient-to-r from-slate-800 to-transparent pointer-events-none z-10"></div>
+            <div className="absolute right-0 top-0 bottom-6 w-8 bg-gradient-to-l from-slate-800 to-transparent pointer-events-none z-10"></div>
           </div>
         </div>
+
+        {/* Custom CSS Styles */}
+        <style jsx>{`
+          .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #8b5cf6 #1e293b;
+            scroll-behavior: smooth;
+          }
+
+          .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+          }
+
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+            border-radius: 4px;
+          }
+
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #8b5cf6, #a855f7);
+            border-radius: 4px;
+            border: 1px solid #334155;
+          }
+
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, #7c3aed, #9333ea);
+          }
+
+          .custom-scrollbar::-webkit-scrollbar-corner {
+            background: #1e293b;
+          }
+
+          /* Smooth scroll snapping */
+          .custom-scrollbar {
+            scroll-snap-type: x proximity;
+          }
+
+          .custom-scrollbar > div > * {
+            scroll-snap-align: start;
+          }
+
+          /* Hide scrollbar on mobile for cleaner look */
+          @media (max-width: 768px) {
+            .custom-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+            
+            .custom-scrollbar {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          }
+        `}</style>
       </section>
 
       {/* Modal */}
