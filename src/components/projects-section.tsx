@@ -4,7 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Smartphone, Presentation } from "lucide-react"
 import { useState } from "react"
-import TestBrushPng from "../../public/TestBrushPng.png"
 
 // Define the Project type
 type Project = {
@@ -159,15 +158,11 @@ export function ProjectsSection() {
 
   return (
     <>
-      <section id="projects" className="py-20 bg-slate-800 relative">
+      <section id="projects" className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative ">
         <div className="max-w-7xl mx-auto px-6">
           <div className="inline-block mb-12 relative">
-            {/* Background image behind the About text */}
-            <img
-              src={TestBrushPng.src}
-              alt=""
-              className="absolute -left-23 -top-5 w-[280%] max-w-none pointer-events-none"
-            />
+            {/* Background image behind the Projects text */}
+            <div className="absolute -left-23 -top-5 w-[280%] h-12 bg-gradient-to-r from-purple-600/20 via-purple-500/30 to-transparent blur-xl pointer-events-none" />
             <h2 className="text-2xl font-bold text-white relative">Projects</h2>
           </div>
 
@@ -183,8 +178,8 @@ export function ProjectsSection() {
             >
               <div className="flex space-x-6 w-max">
                 {projects.map((project, index) => (
-                  <Card key={index} className="w-80 bg-slate-900/50 border-purple-500/30 backdrop-blur-sm flex-shrink-0 hover:bg-slate-900/70 transition-all duration-300">
-                    <CardHeader className="pb-3">
+                  <Card key={index} className="w-80 h-[520px] bg-slate-900/50 border-purple-500/30 backdrop-blur-sm flex-shrink-0 hover:bg-slate-900/70 transition-all duration-300 flex flex-col">
+                    <CardHeader className="pb-3 flex-shrink-0">
                       <div 
                         className="relative cursor-pointer group"
                         onClick={() => openModal(project, 0)}
@@ -203,20 +198,28 @@ export function ProjectsSection() {
                           </div>
                         )}
                       </div>
-                      <CardTitle className="text-white text-lg">{project.title}</CardTitle>
-                      <CardDescription className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+                      <CardTitle className="text-white text-lg line-clamp-2">{project.title}</CardTitle>
+                    </CardHeader>
+                    
+                    <CardContent className="pt-0 flex-1 flex flex-col">
+                      {/* Description with fixed height */}
+                      <CardDescription className="text-gray-400 text-sm leading-relaxed mb-4 h-16 overflow-hidden">
                         {project.description}
                       </CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.map((tech) => (
-                          <Badge key={tech} variant="secondary" className="bg-purple-600/20 text-purple-300 text-xs">
-                            {tech}
-                          </Badge>
-                        ))}
+                      
+                      {/* Technologies - flexible space */}
+                      <div className="flex-1 mb-4">
+                        <div className="flex flex-wrap gap-2">
+                          {project.technologies.map((tech) => (
+                            <Badge key={tech} variant="secondary" className="bg-purple-600/20 text-purple-300 text-xs">
+                              {tech}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex flex-wrap gap-3">
+                      
+                      {/* Links - always at bottom */}
+                      <div className="flex flex-wrap gap-3 mt-auto">
                         {project.links.map((link, linkIndex) => (
                           <a
                             key={linkIndex}
@@ -292,6 +295,14 @@ export function ProjectsSection() {
               -ms-overflow-style: none;
               scrollbar-width: none;
             }
+          }
+
+          /* Utility classes for text truncation */
+          .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
           }
         `}</style>
       </section>

@@ -9,7 +9,7 @@ export function Navigation() {
   const navItems = [
     { id: "about", label: "About" },
     { id: "projects", label: "Projects" },
-    { id: "experience", label: "Experience" },
+    //{ id: "experience", label: "Experience" },
     { id: "articles", label: "Articles" },
     { id: "contacts", label: "Contacts" },
   ]
